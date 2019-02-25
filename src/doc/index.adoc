@@ -13,7 +13,7 @@ To run: +
 ----
 ./docker-compose up
 ----
-
+All required images will be downloaded. +
 Application is listening on port 8080
 
 
