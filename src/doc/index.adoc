@@ -1,0 +1,23 @@
+= TwitterLike service Getting Started Guide
+
+[introduction]
+= Introduction
+
+RESTful microservice for ...
+
+
+
+[[resource-create-tweet]]
+== Creating tweets
+
+A POST request to create tweet
+
+include::{snippets}/create-tweet/response-fields.adoc[]
+
+=== Example request
+
+include::{snippets}/create-tweet/curl-request.adoc[]
+
+=== Example response
+
+include::{snippets}/create-tweet/http-response.adoc[]
