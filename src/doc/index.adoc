@@ -9,19 +9,23 @@ Contains integration tests with embedded elastic server. +
 
 == How to run
 
-To build: +
-----
-./gradlew docker
-----
 To run: +
 ----
 ./docker-compose up
 ----
+All required images will be downloaded. +
+Application is listening on port 8080
 
-Embedded elastic may cause problems. In such case build with: +
+
+To build: +
+----
+./gradlew docker
+----
+Note that first execution is quite long. To make it faster you can skip tests with: +
 ----
 ./gradlew docker -x test
 ----
+
 
 == TODOs
 
@@ -32,6 +36,7 @@ Thnigs left to do:
 * production configuration
 * sort tweets result
 * improve exception handling
+* implement less naive waiting in tests
 
 
 == Creating tweets

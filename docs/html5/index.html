@@ -464,14 +464,6 @@ Contains integration tests with embedded elastic server.<br>
 <h2 id="_how_to_run">How to run</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To build:<br></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>./gradlew docker</pre>
-</div>
-</div>
-<div class="paragraph">
 <p>To run:<br></p>
 </div>
 <div class="listingblock">
@@ -480,7 +472,19 @@ Contains integration tests with embedded elastic server.<br>
 </div>
 </div>
 <div class="paragraph">
-<p>Embedded elastic may cause problems. In such case build with:<br></p>
+<p>All required images will be downloaded.<br>
+Application is listening on port 8080</p>
+</div>
+<div class="paragraph">
+<p>To build:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./gradlew docker</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that first execution is quite long. To make it faster you can skip tests with:<br></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -499,7 +503,8 @@ Contains integration tests with embedded elastic server.<br>
 * springboot security
 * production configuration
 * sort tweets result
-* improve exception handling</p>
+* improve exception handling
+* implement less naive waiting in tests</p>
 </div>
 </div>
 </div>
@@ -602,7 +607,7 @@ Contains integration tests with embedded elastic server.<br>
 Content-Length: 116
 Content-Type: application/json;charset=UTF-8
 
-{"id":"nw6IJGkBIzaYBrpDIA8p","userName":"Johnny","message":"message sent","creationDate":"2019-02-24T15:56:49.094Z"}</code></pre>
+{"id":"pSsRJmkBLBewfJKGpY04","userName":"Johnny","message":"message sent","creationDate":"2019-02-24T15:56:49.094Z"}</code></pre>
 </div>
 </div>
 </div>
@@ -716,7 +721,7 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 162
 Content-Type: application/json;charset=UTF-8
 
-{"tweets":[{"id":"mw6IJGkBIzaYBrpDEQ8N","message":"message with #tag","creationDate":"2019-02-25T12:01:30.847Z"}],"paging":{"totalCount":1,"limit":10,"offset":0}}</code></pre>
+{"tweets":[{"id":"oSsRJmkBLBewfJKGho0q","message":"message with #tag","creationDate":"2019-02-25T19:11:16.421Z"}],"paging":{"totalCount":1,"limit":10,"offset":0}}</code></pre>
 </div>
 </div>
 </div>
@@ -834,7 +839,7 @@ Content-Type: application/json;charset=UTF-8
 Content-Length: 261
 Content-Type: application/json;charset=UTF-8
 
-{"tweets":[{"id":"qQ6IJGkBIzaYBrpDIQ-N","message":"#sample message","creationDate":"2019-02-25T12:01:35.114Z"},{"id":"qA6IJGkBIzaYBrpDIQ95","message":"#sample message","creationDate":"2019-02-25T12:01:35.093Z"}],"paging":{"totalCount":20,"limit":2,"offset":10}}</code></pre>
+{"tweets":[{"id":"rysRJmkBLBewfJKGp41d","message":"#sample message","creationDate":"2019-02-25T19:11:25.016Z"},{"id":"risRJmkBLBewfJKGp41E","message":"#sample message","creationDate":"2019-02-25T19:11:24.991Z"}],"paging":{"totalCount":20,"limit":2,"offset":10}}</code></pre>
 </div>
 </div>
 </div>
@@ -843,7 +848,7 @@ Content-Type: application/json;charset=UTF-8
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-25 15:05:55 +01:00
+Last updated 2019-02-25 20:28:15 +01:00
 </div>
 </div>
 </body>

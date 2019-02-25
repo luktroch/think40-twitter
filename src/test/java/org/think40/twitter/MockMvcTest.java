@@ -67,7 +67,7 @@ public class MockMvcTest {
     public void searchByTag() throws Exception {
         this.mockMvc.perform(post("/api/v1/tweets").content("{\"message\":\"message with #tag\"}").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         this.mockMvc.perform(get("/api/v1/tweets?tag=tag"))
                 .andExpect(status().isOk())
@@ -95,7 +95,7 @@ public class MockMvcTest {
 
         this.mockMvc.perform(post("/api/v1/tweets").content("{\"message\":\"more #tag #with\"}").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         this.mockMvc.perform(get("/api/v1/tweets?tag=with"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.tweets", hasSize(1)))
@@ -103,7 +103,7 @@ public class MockMvcTest {
 
         this.mockMvc.perform(post("/api/v1/tweets").content("{\"message\":\"more #with #tag #with\"}").contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         this.mockMvc.perform(get("/api/v1/tweets?tag=with"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.tweets", hasSize(2)));
