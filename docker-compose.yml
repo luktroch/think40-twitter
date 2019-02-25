@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   twitter:
-    image: think40/twitter-app:latest
+    image: luktroch/twitter:latest
     container_name: twitter
     environment:
       - 'elasticsearch.host=elasticsearch'

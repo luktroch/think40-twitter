@@ -21,7 +21,7 @@ ext {
 
 docker {
     dependsOn build
-    name 'think40/twitter-app'
+    name 'luktroch/twitter'
     files jar.archivePath
     buildArgs([JAR_FILE: "${jar.archiveName}"])
 }
