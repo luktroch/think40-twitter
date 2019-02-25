@@ -29,14 +29,14 @@ Note that first execution is quite long. To make it faster you can skip tests wi
 
 == TODOs
 
-Thnigs left to do:
-* checkstyle
-* static code analysis
-* springboot security
-* production configuration
-* sort tweets result
-* improve exception handling
-* implement less naive waiting in tests
+Thnigs left to do: +
+* checkstyle +
+* static code analysis +
+* springboot security for authentication +
+* production configuration +
+* sort search tweets result +
+* improve exception handling +
+* implement less naive waiting in tests +
 
 
 == Creating tweets
