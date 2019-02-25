@@ -422,13 +422,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h1>TwitterLike service Getting Started Guide</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
+<ul class="sectlevel0">
 <li><a href="#_introduction">Introduction</a>
 <ul class="sectlevel1">
-<li><a href="#resource-create-tweet">Creating tweets</a>
+<li><a href="#_how_to_run">How to run</a></li>
+<li><a href="#_todos">TODOs</a></li>
+<li><a href="#_creating_tweets">Creating tweets</a>
 <ul class="sectlevel2">
 <li><a href="#_example_request">Example request</a></li>
 <li><a href="#_example_response">Example response</a></li>
+</ul>
+</li>
+<li><a href="#_searching_tweets">Searching tweets</a>
+<ul class="sectlevel2">
+<li><a href="#_search_by_tag_example_request">Search by tag example request</a></li>
+<li><a href="#_search_by_tag_example_response">Search by tag example response</a></li>
+</ul>
+</li>
+<li><a href="#_searching_tweets_with_paging">Searching tweets with paging</a>
+<ul class="sectlevel2">
+<li><a href="#_search_with_paging_example_request">Search with paging example request</a></li>
+<li><a href="#_search_with_paging_example_response">Search with paging example response</a></li>
 </ul>
 </li>
 </ul>
@@ -437,17 +451,101 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_introduction">Introduction</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>RESTful microservice for &#8230;&#8203;</p>
+<h1 id="_introduction" class="sect0">Introduction</h1>
+<div class="openblock partintro">
+<div class="content">
+RESTful microservice for storing and searching messages.<br>
+Authentication is not required.<br>
+Uses elastic search cluster as a storage.<br>
+Contains integration tests with embedded elastic server.<br>
+</div>
 </div>
 <div class="sect1">
-<h2 id="resource-create-tweet">Creating tweets</h2>
+<h2 id="_how_to_run">How to run</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A POST request to create tweet</p>
+<p>To build:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./gradlew docker</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To run:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./docker-compose up</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Embedded elastic may cause problems. In such case build with:<br></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>./gradlew docker -x test</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_todos">TODOs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Thnigs left to do:
+* checkstyle
+* static code analysis
+* springboot security
+* production configuration
+* sort tweets result
+* improve exception handling</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_creating_tweets">Creating tweets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>POST request is used to create tweet<br>
+<strong>POST /api/v1/tweets</strong></p>
+</div>
+<div class="paragraph">
+<p>Request fields:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message with tags</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>userName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User who created Tweet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>creationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date when Tweet was created in format: yyyy-MM-dd&#8217;T&#8217;HH:mm:ss.SSS&#8217;Z'. When not provided will be generated</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Response fields:</p>
 </div>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -504,9 +602,239 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 Content-Length: 116
 Content-Type: application/json;charset=UTF-8
 
-{"id":"1zHhI2kBvIJOBDvuOoZq","userName":"Johnny","message":"message sent","creationDate":"2019-02-24T15:56:49.094Z"}</code></pre>
+{"id":"nw6IJGkBIzaYBrpDIA8p","userName":"Johnny","message":"message sent","creationDate":"2019-02-24T15:56:49.094Z"}</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_searching_tweets">Searching tweets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>GET request is used to search for messages<br>
+<strong>GET /api/v1/tweets</strong></p>
+</div>
+<div class="paragraph">
+<p>Request parameters:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tag to search for. Without #. If ommited all messages will be returned.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Response fields:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">array of tweets found</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autogenerated identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message with tags</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].userName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User who created Tweet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].creationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date when Tweet was created in format: yyyy-MM-dd&#8217;T&#8217;HH:mm:ss.SSS&#8217;Z'. When not provided will be generated</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">paging details section</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging.limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of tweets returned</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging.offset</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Results starting index</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging.totalCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of all Tweets found</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_search_by_tag_example_request">Search by tag example request</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/v1/tweets?tag=tag' -i -X GET</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search_by_tag_example_response">Search by tag example response</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Length: 162
+Content-Type: application/json;charset=UTF-8
+
+{"tweets":[{"id":"mw6IJGkBIzaYBrpDEQ8N","message":"message with #tag","creationDate":"2019-02-25T12:01:30.847Z"}],"paging":{"totalCount":1,"limit":10,"offset":0}}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_searching_tweets_with_paging">Searching tweets with paging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Request parameters:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tag</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tag to search for. Without #. If ommited all messages will be returned.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>offset</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Results starting index. Default 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of tweets to be returned. Default 10</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Response fields:</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">paging details section</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging.limit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of tweets returned</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging.offset</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Results starting index</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>paging.totalCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of all Tweets found</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">array of tweets found</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autogenerated identifier.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].message</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message with tags</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].userName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User who created Tweet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tweets[].creationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Date when Tweet was created in format: yyyy-MM-dd&#8217;T&#8217;HH:mm:ss.SSS&#8217;Z'. When not provided will be generated</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_search_with_paging_example_request">Search with paging example request</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/api/v1/tweets?tag=sample&amp;limit=2&amp;offset=10' -i -X GET</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_search_with_paging_example_response">Search with paging example response</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
+Content-Length: 261
+Content-Type: application/json;charset=UTF-8
+
+{"tweets":[{"id":"qQ6IJGkBIzaYBrpDIQ-N","message":"#sample message","creationDate":"2019-02-25T12:01:35.114Z"},{"id":"qA6IJGkBIzaYBrpDIQ95","message":"#sample message","creationDate":"2019-02-25T12:01:35.093Z"}],"paging":{"totalCount":20,"limit":2,"offset":10}}</code></pre>
 </div>
 </div>
 </div>
@@ -515,7 +843,7 @@ Content-Type: application/json;charset=UTF-8
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-02-24 22:17:06 +01:00
+Last updated 2019-02-25 15:05:55 +01:00
 </div>
 </div>
 </body>

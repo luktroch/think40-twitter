@@ -1,17 +1,48 @@
 = TwitterLike service Getting Started Guide
 
-[introduction]
 = Introduction
 
-RESTful microservice for ...
+RESTful microservice for storing and searching messages. +
+Authentication is not required. +
+Uses elastic search cluster as a storage. +
+Contains integration tests with embedded elastic server. +
+
+== How to run
+
+To build: +
+----
+./gradlew docker
+----
+To run: +
+----
+./docker-compose up
+----
+
+Embedded elastic may cause problems. In such case build with: +
+----
+./gradlew docker -x test
+----
+
+== TODOs
+
+Thnigs left to do:
+* checkstyle
+* static code analysis
+* springboot security
+* production configuration
+* sort tweets result
+* improve exception handling
 
 
-
-[[resource-create-tweet]]
 == Creating tweets
 
-A POST request to create tweet
+POST request is used to create tweet +
+*POST /api/v1/tweets*
 
+Request fields:
+include::{snippets}/create-tweet/request-fields.adoc[]
+
+Response fields:
 include::{snippets}/create-tweet/response-fields.adoc[]
 
 === Example request
@@ -21,3 +52,38 @@ include::{snippets}/create-tweet/curl-request.adoc[]
 === Example response
 
 include::{snippets}/create-tweet/http-response.adoc[]
+
+== Searching tweets
+
+GET request is used to search for messages +
+*GET /api/v1/tweets*
+
+Request parameters:
+include::{snippets}/search-tweet/request-parameters.adoc[]
+
+Response fields:
+include::{snippets}/search-tweet/response-fields.adoc[]
+
+=== Search by tag example request
+
+include::{snippets}/search-tweet/curl-request.adoc[]
+
+=== Search by tag example response
+
+include::{snippets}/search-tweet/http-response.adoc[]
+
+== Searching tweets with paging
+
+Request parameters:
+include::{snippets}/search-tweet-paging/request-parameters.adoc[]
+
+Response fields:
+include::{snippets}/search-tweet-paging/response-fields.adoc[]
+
+=== Search with paging example request
+
+include::{snippets}/search-tweet-paging/curl-request.adoc[]
+
+=== Search with paging example response
+
+include::{snippets}/search-tweet-paging/http-response.adoc[]
